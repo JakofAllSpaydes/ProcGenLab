@@ -6,6 +6,8 @@ public class PathMaker : MonoBehaviour {
 	
 	private int counter; 
 	public Transform floorPrefab;
+	public Transform floor2Prefab;
+	public Transform floor3Prefab;
 	public Transform pathmakerSpherePrefab;
 	static int tileCount;
 	public int tileReset;
@@ -13,6 +15,7 @@ public class PathMaker : MonoBehaviour {
 	public float turn1;
 	public float turn2;
 	public float turn3;
+	public float tileSelect;
 
 
 	// Use this for initialization
@@ -22,6 +25,7 @@ public class PathMaker : MonoBehaviour {
 		turn1 = (Random.Range(0.15f, 0.3f));
 		turn2 = (Random.Range (0.3f, 0.6f));
 		turn3 = (Random.Range (0.6f, 0.85f));
+		tileSelect = (Random.Range (0f, 1f));
 
 		tileCount = tileReset;
 	}
@@ -45,7 +49,16 @@ public class PathMaker : MonoBehaviour {
 				Instantiate (pathmakerSpherePrefab, transform.position, Quaternion.identity);
 			}
 
-			Instantiate (floorPrefab, transform.position, Quaternion.identity);
+
+			if (tileSelect <= 0.3) {
+				Instantiate (floorPrefab, transform.position, Quaternion.identity);
+
+			} else if (tileSelect > 0.3f && tileSelect < 0.7f) {
+				Instantiate (floor2Prefab, transform.position, Quaternion.identity);
+
+			} else if (tileSelect >= 0.7f) {
+				Instantiate (floor3Prefab, transform.position, Quaternion.identity);
+			}
 
 			transform.Translate (0f, 0f, 5f);
 			counter++;
